@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html style = "margin:10px;">
+<head>
+	<title> Promise </title>
+	<meta charset = "utf-8" >
+	<style>
+		.code:hover{
+			background-color: #f2f2df;
+			font-size: 1.1em;
+		}
+	</style>
+</head>
+
+<body>
+	<h1> Promise </h1>
+	<p> Una Promesa (Promise) es un proxy de un valor que no necesariamente se conoce cuando se crea la promesa. <br>Le permite asociar controladores con el valor eventual de éxito o el motivo de falla de una acción asíncrona. <br>Esto <u>permite que los métodos asíncronos devuelvan valores como los métodos síncronos</u>: en lugar de devolver inmediatamente el valor final, el método asíncrono devuelve la promesa de proporcionar el valor en algún momento en el futuro. </p>
+	<p> En otras palabras, una promesa es un objeto que maneja operaciones asíncronas </p>
+	<p style = "text-align: center;"> "I promise to return a value" <br> PENDING -> RESOLVED or REJECTED </p>
+	<p style = "text-align: center; font-weight: bold;"> const myPromise = <span style="color:blue;">new</span> <span style="color:orange;">Promise(</span> (resolve, reject) => {asynchronous code} <span style="color:orange;">)</span> </p>
+	<p> Luego para el flujo dependiendo si funciona o no es:</p>
+	
+	<pre style = "margin-left: 30%; font-weight: bold; font-size:1.1em;">
+	myPromise
+		.then( [funcionó A], [no funcionó A] )
+		.then( [funcionó B], [no funcionó B] )
+		.then( [funcionó C], [no funcionó C] )<span style="color:red;">;</span>
+	</pre>
+	
+	
+	<p> Primero se ejecuta A, luego B y finalmente C </p>
+	
+
+	<p> Una promesa se encuentra en uno de los 3 estados: </p>
+	<ul>
+		<li> <i>pending (pendiente)</i> :  estado inicial, ni cumplido ni rechazado.</li>
+		<li> <i>fulfilled (cumplida)</i> : lo que significa que la operación se completó con éxito.</li>
+		<li> <i>rejected (rechazada)</i> : lo que significa que la operación falló. </li>
+	</ul>
+	
+	<p> Por ejemplo </p>
+	<pre class = "code">
+const myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("foo");
+  }, 300);
+});
+
+myPromise
+  .then(handleResolvedA, handleRejectedA)
+  .then(handleResolvedB, handleRejectedB)
+  .then(handleResolvedC, handleRejectedC);
+	</pre>
+	<ol>
+	  <li>
+		<u>Creación de la Promesa</u>
+		<ul>
+		  <li>Creas una operación asíncrona simulada con <code>setTimeout</code>.</li>
+		  <li>Después de <u>300 milisegundos</u>, la promesa se cumple con éxito invocando a <code>resolve("foo")</code>. <span style = "color:blue;">Esto significa que el valor inicial que viaja por la cadena es el texto <code>"foo"</code></span>.</li>
+		</ul>
+	  </li>
+	  <li>
+		<u>El Encadenamiento (<code>.then</code>)</u>
+		<ul>
+		  <li>Cada <code>.then()</code> <mark>recibe dos funciones como argumentos</mark>: la primera se ejecuta si la promesa anterior se cumplió y la segunda si fue rechazada o lanzó un error.</li>
+		  <li><u>Paso A:</u> Como <code>myPromise</code> se resuelve con <code>"foo"</code>, se ejecuta <code>handleResolvedA("foo")</code>. El resultado que devuelva esta función se pasará automáticamente como argumento al siguiente bloque.</li>
+		  <li><u>Paso B:</u> Si <code>handleResolvedA</code> se ejecuta correctamente y devuelve un valor, se llamará a <code>handleResolvedB(valorAnterior)</code>.</li>
+		  <li><u>Paso C:</u> De igual manera, lo que devuelva <code>handleResolvedB</code> se le pasará a <code>handleResolvedC(valorAnteriorB)</code>.</li>
+		</ul>
+	  </li>
+	  <li>
+		<u>¿Qué pasa si hay un error (Rechazo)?</u>
+		<ul>
+		  <li>Si en alguno de los pasos ocurre un error o la función devuelve una promesa rechazada, se saltará el flujo feliz.</li>
+		  <li>Se ejecutará el manejador de errores del siguiente bloque (por ejemplo, <code>handleRejectedB</code>).</li>
+		  <li>Si el manejador resuelve el error correctamente devolviendo un valor normal, la cadena <u>se recupera</u> y el siguiente paso ejecutará su función de éxito (<code>handleResolvedC</code>).</li>
+		</ul>
+	  </li>
+	</ol>
+	
+	<p> Con manejo de errores: </p>
+	<pre style = "margin-left: 30%; font-weight: bold; font-size:1.1em;">
+	myPromise
+		.then( [funcionó A], [no funcionó A] )
+		.then( [funcionó B], [no funcionó B] )
+		.then( [funcionó C], [no funcionó C] )
+		.catch( (error) => console.log(error) )<span style="color:red;">;</span>
+	</pre>
+	
+	
+	<h3> Ejemplo </h3>
+	<p> Haga las siguientes tareas en orden:<br>
+	1. Pasear al perro <br>
+	2. Limpiar la cocina<br>
+	3. Botar la basura
+	</p>
+	<p> La funciones por defecto serían </p>
+	<pre class = "code">
+	// FUNCIONES ORIGINALES
+	function walkDog(){
+		setTimeout( () => {
+					console.log("Ya has paseado al perro");
+				}
+		, 1500);
+	}
+	function cleanKitchen(){
+		setTimeout( () => {
+					console.log("Limpiaste la cocina");
+				}
+		, 2500);
+	}
+	function takeOutTrash(){
+		setTimeout( () => {
+					console.log("Botaste la basura");
+				}
+		, 500);
+	} </pre>
+	
+	<p> Usando <b>callbacks</b> porque haremos las tareas en orden</p>
+	<pre class = "code">
+	// Si quisiéramos hacer estas tareas en orden, tendríamos que usar callbacks
+	function walkDog(callback){
+		setTimeout( () => {
+						console.log("Has paseado al perro (1)" );
+						callback();
+					}
+		, 1500);
+	}
+	
+	function cleanKitchen(callback){
+		setTimeout( () => {
+						console.log("Has limpiado la cocina (2)");
+						callback();
+					}
+		, 2500);
+	}
+	
+	function takeOutTrash(callback){
+		setTimeout( () => {
+						console.log("Has botado la basura (3)");
+						callback();
+					}
+		, 500);
+	}
+	
+	
+	// Y luego ejecutar
+	walkDog( () => {
+			cleanKitchen( () => {
+				takeOutTrash( () => console.log("Has terminado todas las tareas"));
+		});
+	});</pre>
+	
+	<p> Pero esta no es una buena práctica, ya que si fueran más tareas esto crecería y formaría un <i>callback hell</i> </p>
+	
+	
+	
+	<br>
+	<h2> Usando promesas </h2>
+	<p> Usaremos method chaining. Cómo podemos modificar estas funciones para que al final retorne un objeto (Promesa) </p>
+	<pre class = "code">
+	function walkDog(){
+		return new Promise( (resolve, reject) => {
+			setTimeout( () => {
+						// resolve es una funcióN
+						// DEVOLVERÁ ESTE VALOR
+						resolve( "Has paseado al perro (1)" );
+						}
+			, 1500);
+		});
+		
+	}
+	
+	function cleanKitchen(callback){
+		return new Promise( (resolve, reject) => {
+			setTimeout( () => {
+						// resolve es una función
+						resolve( "Has limpiado la cocina (2)" );
+						}
+			, 1500);
+		});
+	}
+	
+	function takeOutTrash(callback){
+		return new Promise( (resolve, reject) => {
+			setTimeout( () => {
+						// resolve es una función
+						resolve( "Has botado la basura (3)" );
+						}
+			, 1500);
+		});
+	}</pre>
+	
+	<p style = "text-align: center;"> NOTE QUE SOLO SE PASA EL PARÁMETRO <b>resolve</b></p>
+	
+	<br>
+	<h2> Manejando errores </h2>
+	<p> Usando el ejemplo anterior </p>
+	<pre class = "code">
+function walkDog(){
+	return new Promise( (resolve, reject) => {
+		setTimeout( () => {
+					const dogwalked = <b style="color:blue;">true/false</b>;
+					
+					if (dogwalked){
+						<b style="color:red;">resolve</b>( "Has paseado al perro (1)" );
+					}
+					else{
+						<b style="color:red;">reject</b>(" No has paseado al perro");
+					}
+					
+				}
+		, 1500);
+	});
+	
+}
+
+// Ejecución
+walkDog()
+	.then( value => console.log(value) )
+	.catch( (error) => console.log(error));
+	</pre>
+	<p> En este caso vamos a obtener cualquiera de los dos mensajes como string dependiendo del valor del booleano (resaltado en rojo) </p>
+	
+	
+	<br>
+	<a
+		target = "_self"
+		title = "Regresar"
+		href = "../index.html"
+		> Regresar a inicio
+	</a>
+	<br>
+	
+</body>
+
+<script>
+	
+	/*
+	// Si quisiéramos hacer estas tareas en orden, tendríamos que usar callbacks
+	function walkDog(callback){
+		setTimeout( () => {
+						console.log("Has paseado al perro (1)" );
+						callback();
+					}
+		, 1500);
+	}
+	function cleanKitchen(callback){
+		setTimeout( () => {
+						console.log("Has limpiado la cocina (2)");
+						callback();
+					}
+		, 2500);
+	}
+	function takeOutTrash(callback){
+		setTimeout( () => {
+						console.log("Has botado la basura (3)");
+						callback();
+					}
+		, 500);
+	}
+	// Y luego ejecutar
+	walkDog( () => {
+			cleanKitchen( () => {
+				takeOutTrash( () => console.log("Has terminado todas las tareas"));
+		});
+	});
+	
+	*/
+	
+	/*
+	// Usando promesas
+	function walkDog(){
+		return new Promise( (resolve, reject) => {
+			setTimeout( () => {
+						// resolve es una funcióN
+						// DEVOLVERÁ ESTE VALOR
+						resolve( "Has paseado al perro (1)" );
+						}
+			, 1500);
+		});
+		
+	}
+	
+	function cleanKitchen(callback){
+		return new Promise( (resolve, reject) => {
+			setTimeout( () => {
+						// resolve es una función
+						resolve( "Has limpiado la cocina (2)" );
+						}
+			, 1500);
+		});
+	}
+	
+	function takeOutTrash(callback){
+		return new Promise( (resolve, reject) => {
+			setTimeout( () => {
+						// resolve es una función
+						resolve( "Has botado la basura (3)" );
+						}
+			, 1500);
+		});
+	}
+	
+	
+	// Y luego ejecutar
+	//walkDog().then( VALUE ); // La promesa devuelve un valor, y podemos usar ese valor con una arrow func
+	walkDog()
+		.then( value =>  { console.log(value); return cleanKitchen(); })
+		.then( value =>  { console.log(value); return takeOutTrash(); })
+		.then( value =>  { console.log(value); console.log("Has terminado"); });
+	
+	*/
+	
+	// CON MANEJO DE ERRORES
+	function walkDog(){
+		return new Promise( (resolve, reject) => {
+			setTimeout( () => {
+						const dogwalked = false;
+						
+						if (dogwalked){
+							resolve( "Has paseado al perro (1)" );
+						}
+						else{
+							reject(" No has paseado al perro");
+						}
+						
+					}
+			, 1500);
+		});
+		
+	}
+	walkDog()
+		.then( value => console.log(value) )
+		.catch( (error) => console.log(error));
+	
+	
+</script>
+
+
+
+</html>
+

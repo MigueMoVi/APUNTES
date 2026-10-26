@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<header>
+	<title>Aceptar entradas de usuario</title>
+	<meta char = "utf-8">
+	<style>
+		body{
+			background-color: #e3dd96;
+			font-family: Consolas, Arial;
+			font-size: 14px;
+			padding: 5px;
+		}
+		
+		#way{
+			border: solid 1px green;
+			padding: 10px;
+		}
+		code{
+			font-weight: bold;
+			color: #717a77;
+		}
+		
+		.code_{
+			font-weight: bold;
+			color: #313338;
+			line-height: 1.0;
+			padding: 10px;
+			margin-left: 20px;
+			margin-bottom:0px;
+			margin-top:0px;
+		}
+		.code_:hover{
+			background-color: #c1e0cb;
+		}
+		
+	</style>
+</header>
+
+
+<body>
+	<h2>Aceptar la entrada de un usuario</h2>
+	<p>Podemos hacerlo mediante dos formas</p>
+	
+	<div id = "way">
+		<h3>1. Window prompt - EASY</h3>
+		
+		<p>Esto se hace usando javascript con la función: <code>window.prompt("...")</code> para asignar el valor recibido a una variable. Esto fue la ventana que se ha visto al incio</p>
+		<pre class = "code_">
+		let Nombre
+		Nombre = window.prompt("¿Cuál es tu nombre? ")
+		// Imprimir en consola
+		console.log(Nombre);</pre>
+		
+	</div>
+	<br>
+	
+	<div id = "way">
+		<h3>2. HTML Text box - PROFESSIONAL</h3>
+		<p>Vamos a usar < input>, < label> y que tenga un botón que llame a una función de JS que lea el contenido del input</p>
+		
+		<pre class = "code_">
+		< label>Nombre:< /label>
+		< input id = "nombre_input">< br>
+		< button id = "mySubmit"> Enviar nombre < /button> </pre>
+		<pre class = "code_">
+		let nombre;
+		document.getElementById("mySubmit").onclick = <b style = "color:red;">function</b>(){
+			nombre = document.getElementById("nombre_input").value;
+			console.log(nombre);
+		} </pre>
+		<br>
+		<!-- Hacer un pequeño entry con un botón-->
+		<div>
+			<label>Nombre: </label>
+			<input id = "nombre_input"><br>
+			<button id = "mySubmit"> Enviar nombre </button>
+		</div>
+		<p>Este es un ejemplo de una <b style = "color:green;">función anónima</b>. No tiene nombre y se suele usar cuando se necesita realizar una función rápida que solo será usada una vez en toda la ejecución, y no serviría mucho hacer un definición completa. Solo se usa una vez</p>
+		
+	</div>
+	<br>
+	
+	
+	
+	<br>
+	<a
+		href = "../index.html"
+		target = "_self"
+		> Regresar a incio
+	</a>
+	
+	<script src = "aceptar_entrada.js"></script>
+	
+	
+</body>
+
+</html>

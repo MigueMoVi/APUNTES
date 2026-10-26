@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title> Inicios CSS </title>
+	<meta charset="utf-8">
+	<link rel = "stylesheet" href = "style1.css">
+	<link rel="icon" href="images/check-icon.ico"><!-- type="image/x-icon" /> -->
+</head>
+
+<!--
+Para dar estilos al texto o a fondos se usa style = "[aca va la informacion]"
+Hay 3 formas de asignar estilos:
+- Inline:
+	Poner atributos a cada línea, como por ejemplo
+	<h2 style = "color:Green"> Inicios de css </h2>
+	Note que se usa ":"
+	
+- Internal:
+	Usando <style> en la cabezera de la página (sección <head></head>).
+	Al hacer esto se definen las propiedades para todos los contenedores que existen en la página, por consiguiente, no se necesita definir los 
+	estilos en cada línea nuevamente, solo se dejan vacías porque ya se definieron en el principio. Por ejemplo
+	<style>
+		body {
+			background-color: #caedc7;
+		}
+		h2 {
+			color : Green
+		}
+		p{
+			color : Gray
+		}
+	</style>
+	Note que se usa {} y también ":"
+	
+- External
+	Se hace con CSS. La mejor opción.
+	Se copiará todo lo que está DENTRO el contenedor <style> en el nuevo archivo css. En la página HTML se hace:
+	<link rel = "stylesheet" href = "[nombre del archivo con el estilo].css">
+	
+
+
+
+Formas de poner colores INLINE
+- style = "background-color:black"
+- style = "background-color:rgb(140, 210, 214)"
+- style = "background-color:#caedc7"
+
+
+--->
+
+<body>
+	<h2> Inicios de css </h2>
+	<p>
+	Texto como "diálogo" y texto como "monólogo"
+	Otra noción importante es que los textos (y discursos) no son solo "monologales". En lingüística, el término texto sirve tanto para producciones en que solo hay un emisor (situaciones monogestionadas o monocontroladas) como en las que varios intercambian sus papeles (situaciones poligestionadas o policontroladas) como las conversaciones. El texto contiene conectores y signos, etc.
+	</p>
+	<br>
+	<p>Ejemplos :</p>
+	
+	<!-- tipos?-->
+	<h3>Monologales</h3>
+	<ul>
+		<li>Oral: Una declamación, un discurso político.</li>
+		<li>Escrita: Una carta de solicitud o una novela.</li>
+	</ul>
+	
+	<h3>Dialogales</h3>
+	<ul>
+		<li>Oral: Una conversación en un bar o en un banco..</li>
+		<li>Escrita: Una conversación por chat o por cartas.</li>
+	</ul>
+	
+	<br>
+	
+	<p1>
+	Viktor Frankl desconocía la parte bioquímica de la esperanza y de la pasión, pero observó que cuando alguien poseía recuerdos a los que agarrarse o ideales, esa persona
+	tenía la capacidad de sobrevivir física y psicológicamente a cualesquiera traumas. Poseer ideales, mantener recuerdos agradables de nuestra vida a los que recurrir cuando las
+	circunstancias nos opriman, puede suponer un importante refuerzo para enfrentarnos a los problemas que sobrevengan en un futuro.
+	</p1>
+	<br>
+	
+	<a
+		href = "../index.html"
+		target = "_self"
+		title = "Esto te llevará a index"
+		> Regresar a INDEX
+	</a>
+	
+</body>
+
+	
+</html>

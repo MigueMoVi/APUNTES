@@ -1,0 +1,64 @@
+/*estilo para GRID IMPLÍCITO*/
+html{
+	font-size: 1.1em;
+	margin: 7px;
+}
+
+.item{
+	font-size: 10px;
+	border: solid 2px #339fa1;
+	background-color: #d4fcac;
+}
+
+.code:hover{
+	background-color: #80ed94;
+}
+.code_importante:hover{
+	background-color: yellow;
+}
+
+
+
+/* Ejemplo 1 */
+.grid-container1{
+	border: solid 2px #f5b638;
+	display: grid;
+	
+	grid-template-columns: 100px 100px 100px 100px;
+	grid-auto-rows: 50px;
+	
+	grid-template-areas:
+	"box-1 box-2 box-2 box-3"
+	"box-1 box-4 box-5 box-5";
+	gap: 0.1em;
+}
+
+.grid-container2{
+	border: solid 2px #f5b638;
+	display: grid;
+	
+	grid-template-columns: 100px 100px 100px 100px;
+	grid-auto-rows: 50px;
+	
+	grid-template-areas:
+	"box-1 box-1 box-2 box-3"
+	"box-1 box-1 box-4 box-5";
+	gap: 0.1em;
+}
+
+.grid-container3{
+	border: solid 2px #f5b638;
+	display: grid;
+	
+	grid-template-columns: 100px 100px 100px 100px;
+	grid-auto-rows: 50px;
+	
+	grid-template-areas:
+	"box-1 box-1 box-2 box-3"
+	".     box-4 box-4 box-5";
+	gap: 0.1em;
+}
+
+
+
+

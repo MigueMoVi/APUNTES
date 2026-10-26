@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title> Bento grids </title>
+	<meta charset = "utf-8">
+	<link rel = "stylesheet" href = "estilo3.css">
+</head>
+
+<body>
+	<h1> BENTO GRIDS</h1>
+	<p> ¿Qué sucede si no sabemos con exactitud cuantos datos van a haber dentro de un contenedor pero debemos de acomodarlos bien para el usuario? Por ejemplo, si recibimos información de una base de datos no sabemos con certeza cuantos son y la cantidad puede variar cada vez. </p>
+	
+	<img src = "imgs/caja_bento.jpg" style = "width: 250px;">
+	
+	<p>Para ello se usará la propiedad <b>grid-template-areas:</b> y también es necesario darle un identificador (nombre) a cada uno de los elementos a los que vamos a desplegar en pantalla.   </p>
+	<pre class = "code">
+< div class = "grid-container">
+	< div class = "item" style = "grid-area: box-1"> 1 < /div>
+	< div class = "item" style = "grid-area: box-2"> 2 < /div>
+	< div class = "item" style = "grid-area: box-3"> 3 < /div>
+	< div class = "item" style = "grid-area: box-4"> 4 < /div>
+	< div class = "item" style = "grid-area: box-5"> 5 < /div>
+< /div> </pre>
+	
+	<p> Por ejemplo, podemos hacer lo siguiente: </p>
+	<div class = "grid-container1">
+		<div class = "item" style = "grid-area: box-1"> 1 </div>
+		<div class = "item" style = "grid-area: box-2"> 2 </div>
+		<div class = "item" style = "grid-area: box-3"> 3 </div>
+		<div class = "item" style = "grid-area: box-4"> 4 </div>
+		<div class = "item" style = "grid-area: box-5"> 5 </div>
+	</div>
+	<pre class = "code">
+.grid-container1{
+	border: solid 2px #f5b638;
+	display: grid;
+	
+	grid-template-columns: 100px 100px 100px 100px;
+	grid-auto-rows: 50px;
+	<span class = "code_importante">
+	grid-template-areas:
+	"box-1 box-2 box-2 box-3"
+	"box-1 box-4 box-5 box-5";</span>
+	gap: 0.1em;
+}
+	</pre>
+	
+	
+	
+	
+	<p> O también: </p>
+	<div style = "display: grid; grid-template-columns: 1fr 1fr;">
+		<div class = "grid-container2">
+			<div class = "item" style = "grid-area: box-1"> 1 </div>
+			<div class = "item" style = "grid-area: box-2"> 2 </div>
+			<div class = "item" style = "grid-area: box-3"> 3 </div>
+			<div class = "item" style = "grid-area: box-4"> 4 </div>
+			<div class = "item" style = "grid-area: box-5"> 5 </div>
+		</div>
+		<pre class = "code">
+.grid-container2{
+	border: solid 2px #f5b638;
+	display: grid;
+	
+	grid-template-columns: 100px 100px 100px 100px;
+	grid-auto-rows: 50px;
+	
+	<span class = "code_importante">grid-template-areas:
+	"box-1 box-1 box-2 box-3"
+	"box-1 box-1 box-4 box-5";</span>
+	gap: 0.1em;
+}
+		</pre>
+	</div>
+	
+	<p> Si queremos dejar un espacio vacío, podemos usar "." reemplazando estos espacios </p>
+	
+	
+	<div style = "display: grid; grid-template-columns: 1fr 1fr;">
+		<div class = "grid-container3">
+			<div class = "item" style = "grid-area: box-1"> 1 </div>
+			<div class = "item" style = "grid-area: box-2"> 2 </div>
+			<div class = "item" style = "grid-area: box-3"> 3 </div>
+			<div class = "item" style = "grid-area: box-4"> 4 </div>
+			<div class = "item" style = "grid-area: box-5"> 5 </div>
+		</div>
+		<pre class = "code">
+.grid-container3{
+	border: solid 2px #f5b638;
+	display: grid;
+	
+	grid-template-columns: 100px 100px 100px 100px;
+	grid-auto-rows: 50px;
+	<span class = "code_importante">
+	grid-template-areas:
+	"box-1 box-1 box-2 box-3"
+	".     box-4 box-4 box-5";</span>
+	gap: 0.1em;
+}
+		</pre>
+	</div>
+	
+	
+	<br>
+	<br>
+	<a
+		target = "_self"
+		href = "../index.html"
+		> Regresar a index
+	</a>
+	
+</body>
+
+</html>

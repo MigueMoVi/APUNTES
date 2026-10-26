@@ -1,0 +1,278 @@
+
+<!-- JAVASCRIPT -->
+
+<!DOCTYPE html>
+
+<html>
+
+<header>
+	<meta char = "utf-8">
+	<title>INDEX JS</title>
+	<style>
+		body{
+			background-color: #a9e3f5;
+			font-family: Arial;
+			padding: 10px;
+		}
+		
+		#strings{
+			padding-left: 10px;
+			border: solid 1px green;
+			display: flex;
+			
+		}
+		#observacion{
+			background-color: #f5574c;
+			padding: 5px;
+		}
+		#code{
+			font-size: 1em;
+		}
+		
+		#code:hover{
+			background-color: #96d6c1;
+		}
+		
+	</style>
+</header>
+
+<body>
+	
+	<h1 style = "text-align: center;">Curso de Javascript</h1>
+	<p>Javascript es un lenguaje de programación interpretado que le da funcionalidades a los estilos y elementos de una página web</p>
+	<p>Tiene la extensión <b>.js</b></p>
+	<p>Para enlazar nuestros archivos a la página principal debemos</p>
+	
+	<ul>
+		<li>
+			CSS: En <p1 style = "color: red;"> < header > </p1> colocar <u> < link rel = "stylesheet" href = "ubicación_archivo/nombre.css" > </u>
+		</li>
+		<li>
+			JS: En <p1 style = "color: red;"> < body > </p1> colocar <u> < script src = "ubicación_archivo/nombre.js" > < /script > </u>
+		</li>
+	</ul>
+	<pre> <b>OBS: </b> La línea de < script...> < / script> debe estar dentro de body. Ver código de esta página.
+		Se suele poner esta línea al final de body, ya que si existe una alerta u otras funciones que veremos más adelante, se ejecutarán antes que se cargue la página web
+	</pre>
+	
+	<p id = "observacion">Además, si se trata de acceder a un elemento de la página HTML y este se encuentra líneas más abajo que < script > NO FUNCIONARÁ<p/>
+	
+	<br>
+	
+	<h3>Imprimir en consola</h3>
+	<p>Vamos a imprimir un Hola en consola... Esto se puede ver abriendo el inspector del navegador, sección <b>Consola</b></p>
+	
+	
+	<h3>Ventanas de alerta</h3>
+	<p>Podemos hacerlo con "window.alert("Segunda alerta");"</p>
+	
+	<h3>Modificar el texto de la página web usando js</h3>
+	<p>Las dos líneas que siguen están en blanco en el código HTML, pero son llenadas con código del script .js</p>
+	<pre id = "code">
+		< div id = "strings">
+			< p id = "string1">< /p>
+			< p id = "string2">< /p>
+		< /div> </pre>
+	<pre id = "code">
+		document.getElementById("string1").textContent = "Primer string";
+		document.getElementById("string2").textContent = "Luego sigue el segundo string"; </pre>
+		
+	<div id = "strings">
+		<p id = "string1"></p>
+		<p id = "string2"></p>
+	</div>
+	<p>Como se pudo ver primero se muestran los mensajes de alerta en pantalla y luego se escribió el texto. Cerrar la ventana y volverla a abrir para ver bien.</p> 
+	<!--<p style = ""> Esto se hace con  <u>document.getElementById("string1").textContent = "Primer string";</u> </p>   -->
+		
+	
+	
+	<h2>Contenido</h2>
+	<ol>
+		<li>
+			<a
+				href = "01 Variables/variables.html"
+				title = "Variables en .js"
+				target = "_self"
+				> Variables
+			</a>
+		</li>
+		
+		<li>
+			<a
+				href = "02 User input/aceptar_entrada.html"
+				target = "_self"
+				title = "Aceptar entrada de un usuario"
+				> Aceptar entrada de un usuario
+			</a>
+		</li>
+		
+		<li>
+			<a
+				href = "03 Casting/casting.html"
+				target = "_self"
+				title = "Aceptar entrada de un usuario"
+				> Casting
+			</a>
+		</li>
+		
+		<li>
+			<a
+				href = "04 Constants/constants.html"
+				target = "_self"
+				title = "Aceptar entrada de un usuario"
+				> const
+			</a> - Luego ver ejemplo 1 (Contador)
+		</li>
+		
+		<li>
+			<a
+				href = "05 Obtener Elementos/ObtenerElementos.html"
+				target = "_self"
+				title = "Formas de obtener elementos"
+				> Formas de obtener elementos
+			</a> - Usar referencias
+		</li>
+		
+		<li>
+			<a
+				href = "#"
+				target = "_self"
+				title = "#"
+				> Spread Operator
+			</a> - falta esto
+		</li>
+		
+		<li>
+			<a
+				href = "Avanzados/Callback.html"
+				target = "_self"
+				title = "Callbacks"
+				> Callbacks
+			</a>
+		</li>
+		
+		<li>
+			<a
+				href = "08 foreach/foreach.html"
+				target = "_self"
+				title = "foreach"
+				> foreach()
+			</a>
+		</li>
+		
+		<li>
+			<a
+				href = "09 Funciones Especiales/funciones_esp.html"
+				target = "_self"
+				title = "foreach"
+				> Métodos especiales
+			</a> - map, filter, reduce
+		</li>
+		
+		<li>
+			<a
+				href = "Avanzados/setTimeout.html"
+				target = "_self"
+				title = "foreach"
+				> Funciones de tiempo
+			</a> - setTimeout(), setInterval
+		</li>
+		
+		<li>
+			<a
+				href = "Avanzados/asincrono.html"
+				target = "_self"
+				title = "foreach"
+				> Código asíncrono
+			</a>
+		</li>
+		
+		<li>
+			<a
+				href = "Avanzados/manejo_errores.html"
+				target = "_self"
+				title = "foreach"
+				> Manejo de errores
+			</a>
+		</li>
+		
+		<li>
+			<a
+				href = "Avanzados/promise.html"
+				target = "_self"
+				title = "foreach"
+				> Promise
+			</a> 
+		</li>
+		
+		<li>
+			<a
+				href = "Avanzados/async-await.html"
+				target = "_self"
+				title = "foreach"
+				> Async/await
+			</a> 
+		</li>
+		
+		<li>
+			<a
+				href = "Avanzados/Uso de JSON.html"
+				target = "_self"
+				title = "foreach"
+				> Uso de JSON
+			</a> 
+		</li>
+		
+		<li>
+			<a
+				href = "Avanzados/Fetch/Fetch.html"
+				target = "_self"
+				title = "foreach"
+				> Fetch básico
+			</a> 
+		</li>
+		
+		<li>
+			<a
+				href = "Avanzados/ConsumirAPI/ConsumirAPI.html"
+				target = "_self"
+				title = "foreach"
+				> Consumir datos de una API
+			</a> : Pokemón
+		</li>
+		
+	</ol>
+	
+	
+	
+	
+	<h2>Ejemplos</h2>
+	<ol>
+		<li>
+			<a
+				href = "Ejemplos/01 Contador.html"
+				title = "Contador usando JS y CSS"
+				target = "_self"
+				> Contador usando JS y CSS
+			</a>
+		</li>
+	</ol>
+	
+	
+	
+	<br>
+	<br>
+	<a
+		href = "../index.html"
+		title = "ÍNDICE MAIN"
+		target = "_self"
+		> MAIN
+	</a>
+	
+	
+	
+	<script src = "index_javascript.js"></script>
+	
+</body>
+
+</html>

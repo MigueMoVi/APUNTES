@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title> forEach() </title>
+	<meta charset = "utf-8">
+	<style>
+		.code{
+			margin-left:10px;
+		}
+		.code:hover{
+			background-color: #dce8cc;
+		}
+		
+	</style>
+</head>
+
+<body>
+	<h2> forEach() </h2>
+	<p> Es un método usado para iterar en los elementos de un array y aplicar una función específica (callback) para cada elemento </p>
+	<p> array.forEach(callback) </p>
+	<p> En otras palabras, <span style = "color:blue;">ejecuta la función indicada una vez por cada elemento del array</span>. Por ejemplo: </p>
+	<pre class = "code">
+let numbers = [1, 2, 3, 4, 5];
+
+// Creamos una función para mostrar los elementos
+function display(elem){
+	console.log(elem)
+}
+
+// con forEach
+numbers.forEach(display);
+	</pre>
+	<p> Obtenemos los elementos del arreglo en la consola </p>
+	
+	<br>
+	<h2> Sintaxis </h2>
+	<pre class = "code" style = "margin-left: 5%; font-size: 1.1em; font-weight: bold">
+arr.forEach(function callback(<b style = "color:red;">currentValue</b>, <b style="color:blue;">index</b>, <b style="color:green;">array</b>) {
+    // tu iterador
+}[, thisArg]);
+	</pre>
+	<h3>Parámetros</h3>
+	<div style = "margin-left:10px;">
+		<code>callback</code>
+		<p> Función a ejecutar por cada elemento, que recibe tres argumentos: </p>
+		<ul>
+			<li> <code>currentValue</code> : El elemento actual siendo procesado en el array. </li>
+			<li> <code>index</code> : El índice del elemento actual siendo procesado en el array.. </li>
+			<li> <code>array</code> : El vector en el que forEach() esta siendo aplicado. </li>
+			
+		</ul>
+	</div>
+	<p>Por ejemplo</p>
+	<pre class = "code">
+function <b style="color:#cfc346;">logArrayElements</b>(<b style = "color:red;">element</b>, <b style="color:blue;">index</b>, <b style="color:green;">array</b>) {
+  console.log("a[" + index + "] = " + element);
+}
+	
+// Nótese que se evita el 2° índice ya que no hay ningún elemento en esa posición del array
+[2, 5, , 9].forEach(<b style="color:#cfc346;">logArrayElements</b>);
+	// salida:
+	// a[0] = 2
+	// a[1] = 5
+	// a[2] = 9
+	</pre>
+	
+	<p> También podríamos hacer una función para editar los elementos del arreglo y sumarles 1 a cada uno: </p>
+	<pre class = "code">
+let arr = [1,2,3,4,5]
+
+arr.forEach((elem, index, originalArr) => {
+		originalArr[index] = elem + 1; // Modifica directamente la posición
+});
+
+console.log(arr);
+
+// La salida es: [2,4,6,8,10]
+	</pre>
+	
+</body>
+<script>
+	let numbers = [1, 2, 3, 4, 5];
+	
+	// Creamos una función para mostrar los elementos
+	function display(elem){
+		console.log(elem)
+	}
+	
+	// con forEach
+	numbers.forEach(display);
+</script>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Inventario</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 2rem auto; padding: 0 1rem; }
+        .form-grupo { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+        .card { border: 1px solid #ccc; padding: 0.8rem; margin-bottom: 0.5rem; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+        .resumen { font-weight: bold; margin-top: 1rem; background: #f4f4f4; padding: 0.8rem; border-radius: 4px; }
+        .btn-eliminar { background: #ff4d4d; color: white; border: none; padding: 0.3rem 0.6rem; border-radius: 3px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Inventario de Productos</h1>
+	
+	<!-- Actividad 3 -->
+	<div class = "opciones" id = "cont_orden">
+		<select id="orden">
+			<option value="">Seleccione una opción...</option>
+			<option value="nombre">Nombre (A-Z)</option>
+			<option value="precio-menor">Precio (Menor a Mayor)</option>
+			<option value="precio-mayor">Precio (Mayor a Menor)</option>
+		</select>
+	</div>
+	
+    <form id="form-producto" class="form-grupo">
+        <input type="text" id="nombre" placeholder="Nombre producto" required>
+        <input type="number" id="precio" placeholder="Precio ($)" step="0.01" required>
+        <button type="submit">Agregar</button>
+    </form>
+	
+    <div id="lista-productos"></div>
+    <div id="resumen" class="resumen">Total de productos: 0 | Valor Total: $0.00</div>
+	
+	<!-- Actividad 1-->
+	<!-- No uso formulario porque este fuerza a recargar la página, y sin el no pasa esto -->
+	<input type="text" id="buscador" placeholder="Buscar producto...">
+	
+
+    <script src="style3.js" defer></script>
+</body>
+</html>

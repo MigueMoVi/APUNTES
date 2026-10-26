@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html style = "margin:10px;">
+<head>
+	<title> Manejo de errores </title>
+	<meta charset = "utf-8" >
+</head>
+
+<body>
+	<h1> Manejo de errores </h1>
+	<p> Cuando un error ocurre <u>se crea un objeto para representar el problema que sucede</u>. Suelen ocurrir en las entradas de usuario o cuando se trata de establecer una conexión. <br> En esta situación, podemos usar las siguientes sentencias para el manejo correcto del error: </p>
+	<ul>
+		<li> <b>try{}</b>: Encierra el código que puede causar un error</li>
+		<li> <b>catch{}</b>: Captura y maneja cualquier error que se haya generado en la sección <b>try</b></li>
+		<li> <b>finally{}</b>: (OPCIONAL) Siempre se ejecuta. Usado comúnmente para limpiar la ejecución, cerrar conexiones, liberar recursos </li>
+	</ul>
+	<p> Por ejemplo, tratamos de usar el valor de x, que es una variable que nunca ha sido definida. Esto ocasionará un error, pero en vez de detener el programa, vamos a imprimir el error en consola evitando la interrupción y mostrando un mensaje al final </p>
+	<pre>
+<b style = "color:#873ac7;">try</b>{
+	console.log(<b style = "color:red;">X</b>);
+}
+<b style = "color:#873ac7;">catch</b>(error){
+	console.log(error);
+}
+<b style = "color:#873ac7;">finally</b>{
+	console.log("Esta parte siempre se ejecuta")
+}
+	</pre>
+	<p> La salida es: </p>
+	<pre style = "color: red;">
+ >> ReferenceError: X is not defined
+ >> Esta parte siempre se ejecuta
+	</pre>
+	
+	
+	<h3> Construir errores </h3>
+	<p> Las entradas de usuario siempre son peligrosas para el flujo del programa. Un caso muy práctico y simple para entenderlo, es la división. No se puede dividir por cero, y cuando el usuario trata de hacerlo se generará un error<br> Por ello, nosotros debemos de validar que esto no suceda: </p>
+	<div style = "border: solid 1px blue; padding: 5px;">
+		<input id = "dividendo" placeholder = "Dividendo">
+		<input id = "divisor" placeholder = "Divisor">
+		<button onclick = "Division()"> Calcular </button>
+		<p> Resultado: <span id ="resultado"></span></p>
+		<p> Estado: <span id ="estado"></span></p>
+		<p> Errores?: <span id ="errores"></span></p>
+	</div>
+	
+	<p> El código para esta parte es: </p>
+	<pre>
+	function Division(){
+		// Manejar el error
+		let errorS = document.getElementById("errores");
+		let inputDividendo = document.getElementById("dividendo");
+		let inputDivisor = document.getElementById("divisor");
+		try{
+			let dividendo = Number(inputDividendo.value);
+			let divisor = Number(inputDivisor.value);
+			
+			
+			// Error
+			if (divisor == 0){
+				// Crear un objeto de tipo error
+				throw new Error("No puedes dividir entre 0");
+			}
+			if (isNaN(dividendo) || isNaN(divisor)){
+				throw new Error("Ingrese un número, no letras");
+			}
+			
+			// Si no hubo errores
+			let result = dividendo / divisor;
+			let res_s = document.getElementById("resultado");
+			
+			res_s.textContent = `${dividendo} / ${divisor} = ${result}`;
+			// limpiar
+			errorS.textContent = "NO";
+			inputDividendo.value = "";
+			inputDivisor.value = "";
+		}
+		catch(error){
+			console.log(error);
+			// Mostrar error en la pantalla, parte de Errores?
+			errorS.textContent = `SI: ${String(error)}`;
+		}
+		finally{
+			document.getElementById("estado").textContent = "Terminado, siempre se muestra";
+		}
+	}
+	</pre>
+	
+	
+	
+	<br>
+	<a
+		target = "_self"
+		title = "Regresar"
+		href = "../index.html"
+		> Regresar a inicio
+	</a>
+	<br>
+	
+</body>
+
+<script>
+		
+	function Division(){
+		// Manejar el error
+		let errorS = document.getElementById("errores");
+		let inputDividendo = document.getElementById("dividendo");
+		let inputDivisor = document.getElementById("divisor");
+		try{
+			let dividendo = Number(inputDividendo.value);
+			let divisor = Number(inputDivisor.value);
+			
+			
+			// Error
+			if (divisor == 0){
+				// Crear un objeto de tipo error
+				throw new Error("No puedes dividir entre 0");
+			}
+			if (isNaN(dividendo) || isNaN(divisor)){
+				throw new Error("Ingrese un número, no letras");
+			}
+			
+			// Si no hubo errores
+			let result = dividendo / divisor;
+			let res_s = document.getElementById("resultado");
+			
+			res_s.textContent = `${dividendo} / ${divisor} = ${result}`;
+			// limpiar
+			errorS.textContent = "NO";
+			inputDividendo.value = "";
+			inputDivisor.value = "";
+		}
+		catch(error){
+			console.log(error);
+			// Mostrar error en la pantalla, parte de Errores?
+			errorS.textContent = `SI: ${String(error)}`;
+		}
+		finally{
+			document.getElementById("estado").textContent = "Terminado, siempre se muestra";
+		}
+	}
+</script>
+
+
+
+</html>
+
