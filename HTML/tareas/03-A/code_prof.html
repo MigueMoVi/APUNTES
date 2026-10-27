@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de tareas</title>
+    <style>
+        body { font-family: Arial;   }
+		.ejemplo_profe { max-width: 480px; margin: 2rem auto;}
+        li { cursor: pointer; padding: .4rem 0; }
+        .completada { text-decoration: line-through; color: gray; }
+		.explicacion { border: solid 1px #aeb8ad; padding: 5px;}
+		#code { font-width: bold; padding: 2px; font-size: 1.1em; margin:0px; }
+		#code:hover{ background-color: #cfdbce; }
+		.resaltar { font-weight: bold; color: red;}
+		.resaltar2 { font-weight: bold; color: blue;}
+		li:hover{ border: solid 1px yellow;}
+    </style>
+</head>
+<body>
+	<div class = "ejemplo_profe">
+	
+    <h1 id="titulo">Mis tareas</h1>
+	
+    <form id="form-tarea">
+	
+        <input type = "text" id="input-tarea" placeholder="Nueva tarea">
+        <button type = "submit"> Agregar </button>
+	
+    </form>
+	
+	<!-- LISTA PARA RELLENAR-->
+    <ul id="lista"></ul>
+	
+	</div>
+	
+	
+	<div class = "explicacion">
+		<h2> Query Selector </h2>
+		<p> Devuelve una <span class = "resaltar2" >referencia objeto </span> apuntando directamente al nodo que está guardado en la memoria del navegador (en el arbol del DOM).</p>
+		
+		<br>
+		<h2> Añadir elementos</h2>
+		<p> Primero creamos un "puntero" haciendo un query para buscar la lista u objeto al que queremos añadir algo. Por ejemplo a la lista donde se insertan las tareas hechas</p>
+		<pre id = "code"> const lista = document.querySelector('#lista'); </pre>
+		<p>Luego podemos agregar el resultado de varias maneras:</p>
+		<ul>
+				
+			<li>
+				Esto va a insertar el texto como tal dentro de la lista
+			</li>
+			<pre id = "code">lista.append('&ltli> holaa &lt/li>')</pre>
+			
+			
+			<li>
+				En cambio, ahora se está creando un elemento html antes y luego se pasa ese elemento
+			</li>
+			<pre id = "code">
+const li = document.createElement('li');
+li.textContent = "Nuevo elemento de la lista"
+
+// AGREGAR EL HTML EN "li"
+lista.append(li); </pre>
+		
+			<li>
+				Usando <b>innerHTML</b> que interpreta código html
+			</li>
+			<pre id = "code">
+const L = document.querySelector('#lista');
+const E = "hola"
+L.append(E);</pre>
+			
+		</ul>
+		
+		<br>
+		<h2> Obtener valores del html usando funciones</h2>
+		<p>Podemos obtener los valores de los elementos de la lista con: </p>
+		
+		<pre id = "code">
+		const EEE = document.querySelectorAll(<b class = "resaltar">".texto"</b>); </pre>
+		<pre id = "code">
+		EEE.forEach(e => { console.log(e.textContent); }); </pre>
+		<p>Y el resultado es la impresión una tras otra de los elementos guardos. Note que </p>
+		<p> También podemos hacer lo siguiente:</p>
+		
+		<pre id = "code">
+		const N = document.getElementsByClassName(<b class = "resaltar">"texto"</b>); </pre>
+		<pre id = "code">
+		for (let i = 0; i < N.length; i++) {
+			console.log(N[i].textContent); 
+		}</pre>
+		
+		<p> Note la diferencia cuando se usa <b>querySelectorAll</b> a diferencia de <b>getElementsByClassName</b>  </p>
+		<ul>
+			<li>
+			querySelectorAll(".texto") -> <span style = "color: green; font-weight: bold;"> Devuelve una NodeList</span>
+			<ul>
+				<li>Tiene el método .forEach() implementado de forma nativa.</li>
+				<li>Puede contener no solo elementos HTML, sino también nodos de texto o comentarios (aunque con selectores CSS como .texto solo trae elementos).</li>
+			</ul>
+			</li>
+			
+			<li>
+			getElementsByClassName("texto") -> <span style = "color: green; font-weight: bold;"> Devuelve una HTMLCollection </span>
+			<ul>
+				<li> No tiene .forEach(), por lo que necesitas un bucle for, for...of, o convertirla con Array.from()</li>
+				<li> <b>Solo contiene elementos HTML. </b> </li>
+			</ul>
+			</li>
+			
+		</ul>
+		
+	</div>
+	
+</body>
+    <script>
+        // 1. Selección de elementos
+        const form  = document.querySelector('#form-tarea'); /*Contenedor de input, NodeList*/
+		/*Elementos de input*/
+        const input = document.querySelector('#input-tarea');
+		console.log(form);
+		console.log(form.children);
+        const lista = document.querySelector('#lista');
+		
+		
+
+        // 2. Crear un <li> por cada tarea
+        function crearTarea(texto) {
+            const li = document.createElement('li');
+            const span = document.createElement('span');
+            span.className = 'texto';
+			// Asignación: Poner la variable que recibe este módulo dentro de <span>
+            span.textContent = texto;               // textContent: seguro ante HTML
+
+            const btn = document.createElement('button');
+            btn.className = 'btn-eliminar';
+            btn.textContent = 'X';
+			
+			// AGREGAR EL HTML EN "li" LUEGO EN "lista" (variable global?)
+            li.append(span, ' ', btn);
+            lista.append(li);
+        }
+
+    // 3. Evento submit del formulario BOTÓN
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            crearTarea(input.value.trim());
+            input.value = '';
+            input.focus();
+        });
+
+    // 4. Delegación de eventos: un solo listener para toda la lista
+        lista.addEventListener('click', (e) => {
+            const li = e.target.closest('li');
+            if (!li) return;
+
+            if (e.target.matches('.btn-eliminar')) {
+                li.remove();                        // eliminar la tarea
+            } else {
+                li.classList.toggle('completada');  // marcar / desmarcar
+            }
+        });
+    </script>
+
+</html>

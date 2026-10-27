@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title> Código asíncrono </title>
+	<meta charset = "utf-8" >
+	<style>
+		html{
+			font-size: 1.1em;
+		}
+	</style>
+</head>
+
+<body>
+	<h1> Código síncrono </h1>
+	<p> Se ejecuta línea por línea consecutivamente de una manera secuencial. El código espera una operación para y que las instrucciones que lo preceden, terminen, para que se pueda ejecutar </p>
+	
+	<h1> Código asíncrono </h1>
+	<p> Permite realizar múltiples operaciones simultáneamente sin esperar <br>
+	    - No bloquea el flujo de ejecución y permite que el programa continúe <br>
+	    - (operaciones de E/S, peticiones de red, obtención de datos)<br>
+	    - Se maneja con: Callbacks, Promesas, Async/Await
+	</p>
+	<p>Por ejemplo</p>
+	
+	<div style="display:grid; grid-template-columns: 1fr 1fr; margin-left: 20px; gap: 20px;">
+	<pre style="background-color: #f4f4f4; padding: 10px; border-radius: 5px;">
+// Código Fuente
+console.log(1);
+console.log(2);
+console.log(3);
+console.log(4);
+	</pre>
+	
+	<pre style="background-color: #eef9ff; padding: 10px; border-radius: 5px;">
+// Resultado en Consola
+1
+2
+3
+4
+	</pre>
+	</div>
+	
+	<div style="display:grid; grid-template-columns: 1fr 1fr; margin-left: 20px; gap: 20px;">
+	<pre style="background-color: #f4f4f4; padding: 10px; border-radius: 5px;">
+// Código Fuente
+console.log("Ejemplo 2");
+
+<mark style="background-color: #ffcccc;">setTimeout( () => console.log(1), 3000 );</mark>
+console.log(2);
+console.log(3);
+console.log(4);
+	</pre>
+	
+	<pre style="background-color: #eef9ff; padding: 10px; border-radius: 5px;">
+// Resultado en Consola
+Ejemplo 2
+2
+3
+4
+<span style="color:red;">1 <i>(después de 3 segundos)</i></span>
+	</pre>
+</div>
+
+
+<div style="display:grid; grid-template-columns: 1fr 1fr; margin-left: 20px; gap: 20px;">
+	<pre style="background-color: #f4f4f4; padding: 10px; border-radius: 5px;">
+// Código Fuente
+Mensaje_1(<b style="color:blue;">Mensaje_2</b>);
+
+function Mensaje_1(<b style="color:blue;">callback</b>){
+	setTimeout( () => {
+			console.log(1);
+			<span style="color:green;">// Se ejecuta estrictamente después del 1</span>
+			<mark>callback()</mark>; 
+		}, 2000 );
+}
+
+function Mensaje_2(){
+	console.log(2);
+	console.log(3);
+	console.log(4);
+}
+	</pre>
+	
+	<pre style="background-color: #eef9ff; padding: 10px; border-radius: 5px;">
+// Resultado en Consola
+<span style="color:gray;">...esperando 2 segundos...</span>
+1
+2
+3
+4
+	</pre>
+	</div>
+	
+	
+	
+	
+	
+	<br>
+	<a
+		target = "_self"
+		title = "Regresar"
+		href = "../index.html"
+		> Regresar a inicio
+	</a>
+	<br>
+	
+</body>
+
+<script>
+	// secuencial
+	console.log(1);
+	console.log(2);
+	console.log(3);
+	console.log(4);
+	
+	console.log("Ejemplo 2");
+	
+	// Ejemplo asíncrono
+	setTimeout( () => console.log(1), 3000 );
+	console.log(2);
+	console.log(3);
+	console.log(4);
+	
+	// Ejemplo asíncrono
+	console.log("Ejemplo 3");
+	// Esto hace lo mismo que el ejemplo 2
+	Mensaje1(Mensaje2);
+	
+	function Mensaje1(callback){
+		setTimeout( () => console.log(1), 2000 );
+		callback();
+	}
+	
+	function Mensaje2(){
+		console.log(2);
+		console.log(3);
+		console.log(4);
+	}
+	
+	// Ejemplo
+	// Después de se imprima 1, se imprime el resto
+	Mensaje_1(Mensaje_2);
+	
+	function Mensaje_1(callback){
+		setTimeout( () => {
+								console.log(1);
+								callback();
+							}
+		, 2000 );
+	}
+	
+	function Mensaje_2(){
+		console.log(2);
+		console.log(3);
+		console.log(4);
+	}
+	
+</script>
+
+
+
+</html>
+
+

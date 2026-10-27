@@ -1,0 +1,29 @@
+/*style para display*/
+
+body{
+	background-color: #c4c0be;
+	font-family: Consolas;
+}
+
+
+.figuras1{
+	border: solid 1px;
+	border-color: red;
+	display: flex;
+	flex-direction: row; /*por defecto*/
+
+}
+.figuras2{
+	border: solid 1px;
+	border-color: red;
+	display: flex;
+	flex-direction: column; /*por defecto*/
+	flex-wrap: nowrap;
+}
+
+#cuadrado{
+	border: solid 3px green;
+	height: 80px;
+	width: 80px;
+	margin: 2px;
+}

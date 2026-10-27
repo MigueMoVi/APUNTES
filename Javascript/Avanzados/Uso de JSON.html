@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title> Uso de JSON </title>
+	<meta charset = "utf-8" >
+	<style>
+		html{
+			font-size:16px;
+		}
+		.code:hover{
+			background-color:#a8d7e0; 
+		}
+		.syntax{
+			background-color: #d3f2db;
+		}
+		.result:hover{
+			background-color:#b0e3ff;
+		}
+		.ejemplo:hover{
+			background-color: #9ce6c6;
+		}
+		p{
+			margin-left:5px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1> Uso de JSON </h1>
+	<p> El objeto de espacio de nombres JSON contiene métodos estáticos para analizar valores y convertir valores a Notación de Objeto JavaScript (JSON). <br>
+	No se puede usar un constructor para usar la librería JSON (new). Todas las propiedades de JSON <b>son estáticas</b> (como el objeto <b><code> Math</code></b>) <br>
+	- Sirve para intercambiar datos entre un servidor y la aplicación.<br>
+	- Archivos JSON: { key: value } OR [value1, value2, value3, ...]
+	</p>
+	
+	<h2>Métodos</h2>
+	<p>Este objeto tiene los siguientes métodos:</p>
+	
+	<h3><code> isRawJSON() </code></h3>
+	<p>The JSON.isRawJSON() static method tests whether a value is an object returned by JSON.rawJSON(). <br> 
+	Sintaxis</p>
+	<pre style = "text-align: center;" class = "syntax">JSON.isRawJSON(value)</pre>
+	<p>
+	Return value: true if value is created by JSON.rawJSON(); otherwise, false
+	</p>
+	
+	
+	
+	<h3><code> stringify() </code></h3>
+	<p> Convierte un <b style = "color:red">objeto de JS</b> a un <b style = "color:blue;">string JSON</b> </p>
+	<pre style = "text-align: center;" class = "syntax">JSON.stringify( [OBJECTO] )</pre>
+	<p> Por ejemplo: </p>
+	<pre class = "ejemplo">
+	const names = ["Spongebob", "Patrick", "Sandy", "Squidward"];
+	const person = {
+		"name": "Spongebob",
+		"age": 30,
+		"isEmployed": true,
+		"hobbies": ["Jellyfishing", "Karate"]
+	}
+	
+	const PersonString = JSON.stringify(person);
+	const NamesString = JSON.stringify(names);
+	
+	console.log(PersonString);
+	console.log(NamesString); </pre>
+	<pre class = "result">
+	>> '{"name":"Spongebob","age":30,"isEmployed":true,"hobbies":["Jellyfishing","Karate"]}' 
+	>> '["Spongebob","Patrick","Sandy","Squidward"]' </pre>
+	
+	
+	
+	
+	<h3><code> parse() </code></h3>
+	<p> Convierte un <b style = "color:blue">string JSON</b> en un <b style = "color:red">objeto de JS</b></p>
+	<pre style = "text-align: center;" class = "syntax">JSON.parse( [STRING] )</pre>
+	<p> Por ejemplo: </p>
+	<pre class = "ejemplo">
+	const names = `["Spongebob", "Patrick", "Sandy", "Squidward"]`;
+	const person = `{"name": "Spongebob","age": 30,"isEmployed": true,"hobbies": ["Jellyfishing", "Karate"]}`
+	
+	const PersonData = JSON.parse(names);
+	const NamesData = JSON.parse(person);
+	
+	console.log(PersonData);
+	console.log(NamesData); </pre>
+	<pre class = "result">
+	>> Array(4) [ "Spongebob", "Patrick", "Sandy", "Squidward" ]
+	>> Object { name: "Spongebob", age: 30, isEmployed: true, hobbies: (2) […] } </pre>
+	
+	
+	
+	
+	<h3><code> rawJSON() </code></h3>
+	<p> El JSON.rawJSON()El método estático crea un objeto "JSON en bruto" que contiene un trozo de texto JSON. Cuando se serializa a JSON, el objeto JSON crudo se trata como si ya fuera un pedazo de JSON. Se requiere que este texto sea válido JSON. </p>
+	<pre style = "text-align: center;" class = "syntax"> JSON.rawJSON(string) </pre>
+	<p>  </p>
+	
+	
+	
+	
+	<br>
+	<a
+		target = "_self"
+		title = "Regresar"
+		href = "../index.html"
+		> Regresar a inicio
+	</a>
+	<br>
+	
+</body>
+
+<script>
+		
+</script>
+
+
+
+</html>
+

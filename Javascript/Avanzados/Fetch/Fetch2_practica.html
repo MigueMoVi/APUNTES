@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title> Fetch 2 </title>
+	<meta charset = "utf-8" >
+	<style>
+		html{
+			font-size:16px;
+		}
+		.code:hover{
+			background-color:#a8d7e0; 
+		}
+		.def{
+			background-color: #ebde96;
+			border-radius: 5px;
+			padding:15px;
+			border: solid black 1px;
+		}
+		
+		.ejemplo{
+			padding-left:10px;
+			border-left: solid green 2px;
+			border-radius: 5px;
+		}
+		.result{
+			padding-left:25px;
+			border-left: solid skyblue 2px;
+			border-radius: 5px;
+			font-size: 0.9em;
+		}
+		
+		.result:hover{
+			background-color:#b0e3ff;
+		}
+		.ejemplo:hover{
+			background-color: #9ce6c6;
+		}
+		p{
+			margin-left:5px;
+		}
+		pre{
+			margin-left: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1> Práctica con <b><code> fetch</code></b> usando una URL</h1>
+	<p> Usaremos la siguiente API para realizar esta práctica de GET y POST</p>
+	
+	<pre style = "text-align: center; font-weight: bold; font-size: 1.2em;">
+https://reqres.in/api/users</pre>
+	
+	<div style = "font-size: 0.9em; margin: 30px;">
+	<p style = "font-size: 1.3em; color: blue;"><b>No olvidar</b></p>
+	<p> Podemos guardar el resultado de un fetch en una variable en vez de solo llamarla. </p>
+	<pre class = "ejemplo">
+<span style = "color:green">// Llamar a la promesa. Se mostrará en consola</span>
+<span style = "color:orange">fetch</span>("https://reqres.in/api/users")
+	.then(res => { console.log(res) } );
+
+<span style = "color:green">// Si queremos guardarla dentro de una variable y ver el resultado después</span>
+<span style = "color:blue">const</span> promesa = <span style = "color:orange">fetch</span>("https://reqres.in/api/users")
+	.then(res => {return res} );
+//Como es una promesa, debemos de usars [var].then(...)
+promesa.then(datos => {console.log(datos)});</pre>
+	<pre class = "result">
+>> Response { type: "cors", url: "https://reqres.in/api/users", redirected: false, status: 200, ok: true, <br>    statusText: "", headers: Headers(2), body: ReadableStream, bodyUsed: false }</br>
+>> Response { type: "cors", url: "https://reqres.in/api/users", redirected: false, status: 200, ok: true, <br>    statusText: "", headers: Headers(2), body: ReadableStream, bodyUsed: false }</br></pre>
+	<p>Obtenemos la misma respuesta de ambas formas</p>
+	</div>
+	
+	
+	
+	<p> Empezamos haciendo un fetch a la api y vemos el resultado de la promesa. </p>
+	
+	<pre class = "ejemplo">
+fetch("https://reqres.in/api/users")
+	.then(res => { console.log(res) } );</pre>
+	<pre class = "result">
+<span style = "color:red">Response</span> { type: "cors", url: "https://reqres.in/api/users", redirected: false, status: 200, ok: true,<br> statusText: "", headers: Headers(2), body: ReadableStream, bodyUsed: false }</pre>
+	<p> Como vemos recibimos un objeto de la respuesta de la API, por ello debemos de convertirlo a un objeto diferente para poder extraer la información </p>
+	<pre class = "ejemplo">
+fetch("https://reqres.in/api/users")
+	.then( res => res.json() )
+	.then( data => console.log(data) );</pre>
+	<p> Y obtenemos un array: </p>
+	<pre class = "result">
+Object { page: 1, per_page: 6, total: 12, total_pages: 2, data: (6) […], support: {…}, _meta: {…} }</pre>
+	<br>
+	
+	<p> Podemos manejar los errores de la siguiente manera: </p>
+	<pre class = "ejemplo">
+fetch("https://reqres.in/api/users")
+	.then( res => {
+		if (res.ok){
+			console.log("Éxito")
+		}
+		else{
+			console.log("Error")
+		}
+	} )
+	.then( data => console.log(data) )
+	.catch( error => console.log("NO existe el usuario") );</pre>
+	<p>Asi, podemos obtener dos respuestas</p>
+	<pre class = "result">
+>> XHR GET https://reqres.in/api/users/23                                             [HTTP/2 404  315ms]
+>> Error                                                                              Fetch2_practica.html:152:13
+>> undefined                                                                          Fetch2_practica.html:157:26</pre>
+	<pre class = "result">
+>> Éxito                                                                              Fetch2_practica.html:151:13
+>> undefined                                                                          Fetch2_practica.html:157:26</pre>
+	
+	
+	<br>
+	<h2><b> GET </b></h2>
+	<p> Lo que acabamos de hacer es un GET. Recordemos que fetch hace un GET por defecto</p>
+	<pre class = "def">
+fetch(
+	<mark>"https://reqres.in/api/users",</mark>
+	<mark>{ method : 'GET' }	</mark>
+)
+	.then( res => {...} )
+	.then( data => ... )
+	.catch( error => ... );</pre>
+	
+	<p>  El código anterior se ve de la siguiente manera</p>
+	<pre class = "ejemplo">
+fetch(
+	<b>"https://reqres.in/api/users",</b>
+	<b>{ method : 'GET' }</b>
+)
+	.then( res => {
+		if (res.ok){
+			console.log("Éxito")
+		}
+		else{
+			console.log("Error")
+		}
+	} )
+	.then( data => console.log(data) )
+	.catch( error => console.log("NO existe el usuario") );</pre>
+	<pre class = "result"> // Obtenemos el mismo resultado visto anteriormente </pre>
+	
+	
+	<br>
+	<h2><b> POST </b></h2>
+	<p> Cuando hacemos un POST tenemos que pasar los datos que vamos a enviar a la API especificamdp que estamos haciendo un post. </p>
+	<pre class = "def">
+fetch(
+	<mark>"https://reqres.in/api/users",</mark>
+	<mark>{</mark>
+	<mark>	method : 'POST',</mark>
+	<mark>	headers: {}  </mark>            <span style = "color:green">// Especificar que estamos pasando (Es un JSON?)</span>
+	<mark>	body: JSON.stringify( { name: 'User 1', ... } )</mark> <span style = "color:green">// Contenido, datos en JSON</span>
+	<mark>}</mark>	
+)
+	.then( res => {
+			return res.json()
+	} )
+	.then( data => console.log(data) )
+	.catch( error => console.log("NO existe el usuario") );</pre>
+	<p>Observe el siguiente ejemplo</p>
+	<pre class = "ejemplo">
+fetch(
+	<b>"https://reqres.in/api/users",
+	{
+		method : 'POST',
+		// Datos a pasar
+		body: {
+			name: 'User 1'
+		}
+	}</b>	
+)
+	.then( res => {
+			return res.json()
+	} )
+	.then( data => console.log(data) )
+	.catch( error => console.log("NO existe el usuario") );</pre>
+	<pre class = "result">
+>> Object { id: "337", createdAt: "2026-10-27T01:25:57.459Z", support: {…}, _meta: {…} }
+   _meta: Object { powered_by: "ReqRes", docs_url: "https://app.reqres.in/documentation", 
+   upgrade_url: "https://app.reqres.in/upgrade", … }
+		<b style = "color: blue;">createdAt: "2026-10-27T01:25:57.459Z"
+		id: "337"</b>
+   <prototype>: Object { … }</pre>
+	<p> Obtenemos una respuesta grande, pero no ha sido un POST CORRECTO, porque no hemos recibido un nombre de usuario </p>
+	
+	<p> Ahora modificamos algunas cosas. Debemos de pasar los datos como JSON y además debemos de especificar que tipo de datos estamos pasando: </p>
+	<pre class = "ejemplo">
+fetch(
+	<b>"https://reqres.in/api/users",
+	{
+		<span style = "color: #1da6e0;">method</span> : 'POST',
+		<span style = "color: #1da6e0;">headers</span>: { 'Content-Type': 'application/json' },
+		<span style = "color: #1da6e0;">body</span>: <span style = "color: #947d4d">JSON.stringify(</span>{
+			name: 'User 1'
+		}<span style = "color: #947d4d">)</span>
+	}</b>
+)
+	.then( res => {
+			return res.json()
+	} )
+	.then( data => console.log(data) )
+	.catch( error => console.log("NO existe el usuario") );</pre>
+	
+	<pre class = "result">
+Object { name: "User 1", id: "347", createdAt: "2026-10-27T01:38:30.902Z", support: {…}, _meta: {…} }
+_meta: Object { powered_by: "ReqRes", docs_url: "https://app.reqres.in/documentation", 
+upgrade_url: "https://app.reqres.in/upgrade", … }
+		<b style = "color: green;">createdAt: "2026-10-27T01:38:30.902Z"
+		id: "347"
+		<mark>name: "User 1"</mark></b>
+<prototype>: Object { … }</pre>
+	
+	<div style = "text-align: center;">
+	<h3> Nota</h3>
+	<p> No podemos pasar un objeto de JS directamente a la API, debemos de transformarlo en JSON primero</p>
+	</div>
+	
+	<p> Este contenido es de: 
+	<a
+		href = "https://www.youtube.com/watch?v=cuEtnrL9-H0"
+		title = "Video educativo"
+		target = "_blank"
+		>https://www.youtube.com/watch?v=cuEtnrL9-H0
+	</a>
+	</p>
+	
+	
+	
+	<pre class = "ejemplo"></pre>
+	<pre class = "result"></pre>
+	
+	
+	
+	
+	
+	<br>
+	<a
+		target = "_self"
+		title = "Regresar"
+		href = "../../index.html"
+		> Regresar a inicio
+	</a>
+	<br>
+	
+</body>
+
+<script>
+	// Llamar a la promesa. Se mostrará en consola
+	fetch(
+		"https://reqres.in/api/users",
+		{
+			method : 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				name: 'User 1'
+			})
+		}
+	)
+		.then( res => {
+				return res.json()
+		} )
+		.then( data => console.log(data) )
+		.catch( error => console.log("NO existe el usuario") );
+	
+	
+	
+	/*
+	// Si queremos guardarla dentro de una variable y ver el resultado después
+	const promesa = fetch("https://reqres.in/api/users")
+		.then(res => {return res} );
+	//Como es una promesa, debemos de usars [var].then(...)
+	promesa.then(datos => {console.log(datos)});
+	*/
+</script>
+
+
+
+</html>
+
+

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html style = "margin:10px;">
+<head>
+	<title> Async/await </title>
+	<meta charset = "utf-8" >
+	<style>
+		.code{
+			font-size: 1.1em;
+		}
+		.code:hover{
+			background-color: #f2f2df;
+			font-size: 1.1em;
+		}
+	</style>
+</head>
+
+<body>
+	<h1> Async/await </h1>
+	<p style = "text-align:center;">
+	<b> Async </b>: Hace que una función retorne una <b>Promesa</b> <br>
+	<b>Await</b>: ESPERA UNA PROMESA: Hace que una función asincrónica espere por una promesa
+	</p>
+	<p>
+	- Esto te permite escribir código asincrónico de una manera sincrónica <br>
+	- Async y await SIEMPRE VAN JUNTOS
+	- Async no tiene parámetros resolver o reject. <i>"Es como una promesa vacía"</i> <br>
+	- Todo despues de Await se localiza en una cola de eventos
+	</p>
+	
+	<h3>async function</h3>
+	<p> La declaración async function crea un enlace de una nueva función asíncrona a un nombre dado. La palabra clave await está permitida dentro del cuerpo de la función, lo que permite escribir un comportamiento asíncrono basado en promesas de un estilo más limpio y evitar la necesidad de configurar explícitamente cadenas de promesas. </p>
+	<pre class = "code">
+function resolveAfter2Seconds() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("resolved");
+    }, 2000);
+  });
+}
+
+async function asyncCall__() {
+  console.log("llamando");
+  const result = await resolveAfter2Seconds();
+  console.log(result);
+  // Salida esperada: "resolved"
+}
+
+asyncCall__();</pre>
+	
+	<p>Las funciones asíncronas siempre devuelven una promesa. Si el valor de retorno de una función asíncrona no es explícitamente una promesa, se envolverá implícitamente en una promesa.</p>
+	<div style = "display:flex; flex-direction: row; gap:80px; border: solid 1px green; margin-left:auto; margin-right:auto;">
+	<pre class = "code">
+async function foo() {
+  return 1;
+}
+	</pre>
+	
+	<p style = "font-size: 30px;">=</p>
+	
+	<pre class = "code">
+function foo() {
+  return Promise.resolve(1);
+}
+	</pre>
+	</div>
+	
+	
+	<br>
+	<h3>async function expression</h3>
+	<p> La palabra clave async function puede ser utilizada para definir funciones async dentro de expresiones y para crear <b>funciones anónimas</b>.</p>
+	<pre class = "code">
+async function [nombre]([param1[, param2[, ..., paramN]]]) {
+  enunciados
+} </pre>
+	<p> Note que no se ha declarado nombre de la función. </p> 
+	<p>Ejemplos: </p>
+	<pre class = "code">
+function resuelve2SegundosDespues(x) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(x);
+    }, 2000);
+  });
+}
+
+const agregar = async function (x) {
+  // Expresión de una función asíncrona asignada a una variable
+  let a = await resuelve2SegundosDespues(20);
+  let b = await resuelve2SegundosDespues(30);
+  return x + a + b;
+}; </pre>
+	
+
+	
+	<p></p>
+	<p></p>
+	<p></p>
+	
+	
+	
+	
+	
+	<br>
+	<a
+		target = "_self"
+		title = "Regresar"
+		href = "../index.html"
+		> Regresar a inicio
+	</a>
+	<br>
+	
+</body>
+
+<script>
+	
+</script>
+
+
+
+</html>
+
+

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Tarea 3-A: Ejercicio 2 </title>
+    <style>
+        body { font-family: Arial;  display: grid ;grid-template-rows: auto auto;}
+        li { cursor: pointer; padding: .4rem 0; }
+		.trabajo { max-width: 480px; margin: 2rem auto; }
+        .completada { text-decoration: line-through; color: gray; }
+		.aparte {background-color: #d3dcde;}
+		
+		
+		/* Estilos para la Actividad 2 */
+		.error { color: red; font-weight: bold; margin: 0.5rem 0; }
+		.borde-rojo { border: 2px solid red; outline: none; }
+
+		
+    </style>
+</head>
+<body>
+    
+	
+	<div class = "trabajo">
+		<h1 id="titulo" style = "text-align: center;">Mis tareas</h1>
+		<form id="form-tarea">
+			<input type="text" id="input-tarea" placeholder="Nueva tarea">
+			<button type="submit">Agregar</button>
+		</form>
+		
+		<ul id="lista"></ul>
+		
+	</div>
+	
+	<div class = "aparte">
+		<!-- actividad 1-->
+		<p id = "contador"> Pendientes: X de Y </p>
+		<!-- Se debe crear un elemento error -->
+	</div>
+	
+<!--
+Cree una función actualizarContador() que calcule los valores con
+querySelectorAll (por ejemplo #lista li:not(.completada)) y llámela
+cada vez que se agregue, complete o elimine una tarea.
+-->
+
+	
+</body>
+    <script>
+        // 1. Selección de elementos
+        const form  = document.querySelector('#form-tarea');
+        const input = document.querySelector('#input-tarea');
+        const lista = document.querySelector('#lista');
+		
+		
+		// ================ ACTIVIDAD 1 ================
+		// Referencia a string
+		const textContador = document.getElementById("contador");
+		// Referencia al botón
+		//const btnSubmit = document.querySelector('button[type="submit"]');
+			
+		// función
+		function actualizarContador(){
+			const totales = document.querySelectorAll('#lista li').length;
+            const pendientes = document.querySelectorAll('#lista li:not(.completada)').length;
+			// Actualizar texto en pantalla
+			textContador.textContent = ` Pendientes: ${pendientes} de ${totales} `;
+		}	
+		
+		/*querySelector o querySelectorAll es para buscar un elemento o elementos exactos, si se usa getElemetnsClassName se está pasando una lista*/
+		
+		// EJERCICIO 2
+		const contenedor_error = document.querySelector(".aparte");
+
+		function mostrarError(mensaje) {
+			// Si ya existe un error en pantalla, no creamos otro repetido
+			if (document.querySelector(".error")) return;
+
+			// 1. Crear el elemento <p class="error"> con su mensaje
+			const elem_error = document.createElement('p');
+			elem_error.classList.add('error'); 
+			elem_error.textContent = mensaje;
+			contenedor_error.appendChild(elem_error);
+
+			// 2. Agregar la clase de borde rojo al input
+			input.classList.add('borde-rojo');
+		}
+
+		function eliminarError() {
+			const borrar = document.querySelector(".error");
+			if (borrar) {
+				borrar.remove();
+			}
+			// Quitar la clase del borde rojo del input
+			input.classList.remove('borde-rojo');
+		}
+
+		// Evento 'input': Limpia el error en cuanto el usuario vuelve a escribir
+		input.addEventListener('input', () => {
+			eliminarError();
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+        // 2. Crear un <li> por cada tarea
+        function crearTarea(texto) {
+            const li = document.createElement('li');
+            const span = document.createElement('span');
+            span.className = 'texto';
+            span.textContent = texto;               // textContent: seguro ante HTML
+
+            const btn = document.createElement('button');
+            btn.className = 'btn-eliminar';
+            btn.textContent = 'X';
+
+            li.append(span, ' ', btn);
+            lista.append(li);
+			
+			// Actividad 1
+			actualizarContador()
+        }
+
+		// 3. Evento submit del formulario (Modificar)
+		form.addEventListener('submit', (e) => {
+			e.preventDefault(); 
+			
+			const valorTarea = input.value.trim();
+
+			// VALIDACIÓN 1: Impedir tareas vacías
+			if (valorTarea === "") {
+				mostrarError("No puedes agregar una tarea vacía.");
+				return; // Detiene la ejecución
+			}
+
+			// VALIDACIÓN 2: Impedir tareas repetidas (sin distinguir mayúsculas)
+			// Obtenemos los textos de los span de la lista actual y los pasamos a minúsculas
+			const tareasExistentes = Array.from(document.querySelectorAll('#lista .texto'))
+										  .map(span => span.textContent.toLowerCase());
+
+			if (tareasExistentes.includes(valorTarea.toLowerCase())) {
+				mostrarError("Esta tarea ya existe en la lista.");
+				return; // Detiene la ejecución
+			}
+
+			// Si pasa las validaciones, se crea la tarea con éxito
+			crearTarea(valorTarea);
+			input.value = '';
+			input.focus(); 
+		});
+
+
+		// 4. Delegación de eventos: un solo listener para toda la lista
+        lista.addEventListener('click', (e) => {
+            const li = e.target.closest('li');
+            if (!li) return;
+
+            if (e.target.matches('.btn-eliminar')) {
+                li.remove();                        // eliminar la tarea
+				// ACTIVIDAD 1
+				actualizarContador()
+				
+            } else {
+                li.classList.toggle('completada');  // marcar / desmarcar
+				// ACTIVIDAD 1
+				actualizarContador()
+            }
+        });
+    </script>
+
+</html>

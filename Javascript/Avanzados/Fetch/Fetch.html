@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title> Fetch 1 </title>
+	<meta charset = "utf-8" >
+	<style>
+		html{
+			font-size:16px;
+		}
+		.code:hover{
+			background-color:#a8d7e0; 
+		}
+		.def{
+			background-color: #ebde96;
+		}
+		.ejemplo{
+			padding-left:10px;
+			border-left: solid green 2px;
+			border-radius: 5px;
+		}
+		.result{
+			padding-left:25px;
+			border-left: solid skyblue 2px;
+			border-radius: 5px;
+		}
+		.result:hover{
+			background-color:#b0e3ff;
+		}
+		.ejemplo:hover{
+			background-color: #9ce6c6;
+		}
+		p{
+			margin-left:5px;
+		}
+		pre{
+			margin-left: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1> Uso de <b><code> fetch</code></b> básico</h1>
+	<p> La API Fetch proporciona una interfaz JavaScript para acceder y manipular partes del canal HTTP, tales como peticiones y respuestas. También provee un método global fetch() que proporciona una forma fácil y lógica de obtener recursos de forma asíncrona por la red. </p>
+	<p><b> RETORNA UNA PROMESA </b></p>
+	<pre class = "def">
+fetch('http://example.com/movies.json')
+	.then(response => response.json())
+	.then(data => console.log(data));	</pre>
+	
+	<p> Por ejemplo, si tenemos un archivo JSON donde se guarda la relacion de personas en formato JSON podemos acceder a esta información si conocemos la ruta... <br> El contenido del archivo "person_Spongebob.json" es: </p>
+	<pre>
+{
+	"name": "Spongebob",
+	"age": 30,
+	"isEmployed": true,
+	"hobbies": ["Jellyfishing", "Karate"]
+}</pre>
+	<p>Entonces podemos hacer:</p>
+	<pre class = "ejemplo">
+	fetch("person_Spongebob.json")
+			.then( response => response.json() )
+			.then( value => console.log(value) )
+			.catch(error => console.log(error)); </pre>
+	<pre class = "result"> <b>>></b> Object { name: "Spongebob", age: 30, isEmployed: true, hobbies: (2) […] }</pre>
+	<p><b>OBS: </b> Solo se podrán ver los resultados iniciando un servidor</p>
+	<br>
+	
+	<p>Ahora tenemos un arreglo de objetos como del ejemplo anterior en un archivo "persons.json"</p>
+	<pre class = "ejemplo">
+	fetch("persons.json")
+		.then( response => response.json() )
+		.then( value => console.log(value) )
+		.catch(error => console.log(error)); </pre>
+	<pre class = "result"> >>
+	Array(5) [ {…}, {…}, {…}, {…}, {…} ]
+	0: Object { name: "Spongebob", age: 30, isEmployed: true, … }
+	1: Object { name: "Elena Rostova", age: 28, isEmployed: true, … }
+	2: Object { name: "Marcus Vance", age: 42, isEmployed: false, … }
+	3: Object { name: "Yuki Tanaka", age: 24, isEmployed: true, … }
+	4: Object { name: "Carlos Mendoza", age: 35, isEmployed: true, … }
+	length: 5
+	<prototype>: Array []</pre>
+	
+	<br>
+	<p>O también podemos imprimir cada elemento por separado</p>
+	<pre class = "ejemplo">
+	fetch("persons.json")
+		.then( response => response.json() )
+		.then( values => values.<span style="color:red;">forEach</span>(value => console.log(value)) )
+		.catch( error => console.log(error));</pre>
+	<pre class = "result"> >>
+	Object { name: "Spongebob", age: 30, isEmployed: true, hobbies: (2) […] }
+	Object { name: "Elena Rostova", age: 28, isEmployed: true, hobbies: (3) […] }
+	Object { name: "Marcus Vance", age: 42, isEmployed: false, hobbies: (2) […] }
+	Object { name: "Yuki Tanaka", age: 24, isEmployed: true, hobbies: (3) […] }
+	Object { name: "Carlos Mendoza", age: 35, isEmployed: true, hobbies: (3) […] }</pre>
+	<br>
+	
+	<p> Como podemos ver, al obtener los datos de una fuente externa de esta manera estamos obteniendo objetos JSON que podemos usar (value.name, value.age, ...)</p>
+	<br>
+	
+	<p> <b> Ejemplo </b> </p>
+	<pre class = "ejemplo">
+var miImagen = document.querySelector("img");
+
+var miSolicitud = new Request("flores.jpg");
+
+fetch(miSolicitud)
+  .then(function (respuesta) {
+    return respuesta.blob();
+  })
+  .then(function (respuesta) {
+    var objeto = URL.createObjectURL(respuesta);
+    miImagen.src = objeto;
+  }); </pre>
+	<pre class = "result"></pre>
+	
+	<br>
+	
+	<h2>Consejo</h2>
+	<p> Podemos guardar el resultado de un fetch en una variable en vez de solo llamarla. </p>
+	<pre class = "ejemplo">
+<span style = "color:green">// Llamar a la promesa. Se mostrará en consola</span>
+<span style = "color:orange">fetch</span>("https://reqres.in/api/users")
+	.then(res => { console.log(res) } );
+
+<span style = "color:green">// Si queremos guardarla dentro de una variable y ver el resultado después</span>
+<span style = "color:blue">const</span> promesa = <span style = "color:orange">fetch</span>("https://reqres.in/api/users")
+	.then(res => {return res} );
+//Como es una promesa, debemos de usars [var].then(...)
+promesa.then(datos => {console.log(datos)});</pre>
+	<pre class = "result">
+>> Response { type: "cors", url: "https://reqres.in/api/users", redirected: false, status: 200, ok: true, <br>    statusText: "", headers: Headers(2), body: ReadableStream, bodyUsed: false }</br>
+>> Response { type: "cors", url: "https://reqres.in/api/users", redirected: false, status: 200, ok: true, <br>    statusText: "", headers: Headers(2), body: ReadableStream, bodyUsed: false }</br></pre>
+	<p>Obtenemos la misma respuesta de ambas formas</p>
+	
+	<p></p>
+	<pre class = "ejemplo"></pre>
+	<pre class = "result"></pre>
+	
+	
+	<p></p>
+	<pre class = "ejemplo"></pre>
+	<pre class = "result"></pre>
+	
+	
+	
+	<br>
+	<a
+		target = "_self"
+		title = "Regresar"
+		href = "../../index.html"
+		> Regresar a inicio
+	</a>
+	<br>
+	
+</body>
+
+<script>
+	console.log("Spongebob")
+	/*fetch("person_Spongebob.json")
+		.then( response => response.json() )
+		.then( value => console.log(value) )
+		.catch(error => console.log(error));*/
+		
+	// Resultado:
+	// >> Object { name: "Spongebob", age: 30, isEmployed: true, hobbies: (2) […] }
+	console.log("persons.json")
+	fetch("persons.json")
+		.then( response => response.json() )
+		.then( values => values.forEach(value => console.log(value)) )
+		.catch( error => console.log(error));
+	
+	/*
+	Array(5) [ {…}, {…}, {…}, {…}, {…} ]
+	0: Object { name: "Spongebob", age: 30, isEmployed: true, … }
+	1: Object { name: "Elena Rostova", age: 28, isEmployed: true, … }
+	2: Object { name: "Marcus Vance", age: 42, isEmployed: false, … }
+	3: Object { name: "Yuki Tanaka", age: 24, isEmployed: true, … }
+	4: Object { name: "Carlos Mendoza", age: 35, isEmployed: true, … }
+	length: 5
+	<prototype>: Array []
+	*/
+	
+	
+	/*
+	Object { name: "Spongebob", age: 30, isEmployed: true, hobbies: (2) […] }
+	Object { name: "Elena Rostova", age: 28, isEmployed: true, hobbies: (3) […] }
+	Object { name: "Marcus Vance", age: 42, isEmployed: false, hobbies: (2) […] }
+	Object { name: "Yuki Tanaka", age: 24, isEmployed: true, hobbies: (3) […] }
+	Object { name: "Carlos Mendoza", age: 35, isEmployed: true, hobbies: (3) […] }
+	*/
+</script>
+
+
+
+</html>
+
+

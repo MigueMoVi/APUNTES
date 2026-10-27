@@ -1,0 +1,84 @@
+<DOCTYPE html>
+<html>
+
+<head>
+	<title>Márgenes</title>
+	<meta charset="utf-8">
+	<link rel = "stylesheet" href = "style_margenes.css">
+</head>
+
+<body>
+	
+	<h1>Márgenes</h1>
+	
+	<a
+		href = "../index.html"
+		title = "Regresar"
+		target = "_self"
+		> Regresar a index
+	</a>
+	
+	<pre>Usaremos id para ver la diferencia entre los contenedores que contienen los párrafos. También cómo están centrados y manipular su posición para que se por:
+	- pixeles (px)
+	- automática [ideal para autoajustar de acuerdo al tamaño de página](%) </pre>
+	
+	<p id = "uno">
+	We have included 957 exercises and 158 problems. Each section ends with exercises, and each chapter ends with problems. The exercises are generally short questions that test basic mastery of the material. Some are simple self-check thought
+	exercises, whereas others are more substantial and are suitable as assigned homework. The problems are more elaborate case studies that often introduce new material; they often consist of several questions that lead the student through the steps
+	required to arrive at a solution.
+	</p>
+	
+	<p id = "dos">
+	Departing from our practice in previous editions of this book, we have made publicly available solutions to some, but by no means all, of the problems and exercises. Our Web site, http://mitpress.mit.edu/algorithms/, links to these solutions.
+	You will want to check this site to make sure that it does not contain the solution to an exercise or problem that you plan to assign. We expect the set of solutions that
+	we post to grow slowly over time, so you will need to check it each time you teach the course.
+	</p>
+	
+	<p id = "tres">
+	Many applications require a dynamic set that supports only the dictionary operations INSERT, SEARCH, and DELETE. For example, a compiler that translates a
+	programming language maintains a symbol table, in which the keys of elements are arbitrary character strings corresponding to identifiers in the language. A hash
+	table is an effective data structure for implementing dictionaries. Although searching for an element in a hash table can take as long as searching for an element in a
+	linked list—‚.n/ time in the worst case—in practice, hashing performs extremely well. Under reasonable assumptions, the average time to search for an element in
+	a hash table is O.1/.
+	</p>
+	
+	<p id = "cuatro">
+	este es el cuarto contenedor:
+	
+	</p>
+	
+	
+	<!--                       --->
+	
+	<pre>
+	No confundir <b>padding</b> con <b>margin</b>
+	- Padding, sirve para crear espacio entre el texto y el borde interior
+	- margin, sirve para dar un espacio entre el contenedor al que se le está aplicando esta propiedad y los bordes externos
+	</pre>
+	
+	<p id="comentarios">
+	El PRIMER párrafo tiene <b>margin-left: 40px</b> y por mas que la pantalla cambie de tamaño siempre estará a 40px del borde izquierdo
+	Esto puede ser un problema al momento de hacer el despliegue en una resolución diferente, ya que siempre estará a esa distancia en pixeles
+	</p>
+	
+	<p id="comentarios">
+	Para solucionar esto se usa porcentajes.
+	En el SEGUNDO párrafo tenemos margin-left:50% haciendo que el contenedor con ese id esté ubicado al 50% de la pantalla siempre. Se puede comprobar
+	redimensionando el tamaño de la ventana y notaremos que siempre el margen izquierdo estará exactamente en la mitad de la pantalla
+	</p>
+	
+	<p id="comentarios">
+	El TERCER párrafo tiene <br>
+	- margin-left: auto; <br>
+	- margin-right: auto;<br>
+	lo que posiciona al contenedor alineado a la derecha e izquierda siempre (en el medio) y esto funciona para cualquier redimensionamiento de pantalla
+	</p>
+	
+	<p id="comentarios">
+	Finalemente el CUARTO párrafo tiene <b>margin-right: auto</b> y puede servir como un menu lateral, aunque ocupa todo el espacio en altura
+	</p>
+	
+</body>
+
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title> Varias funciones especiales </title>
+	<meta charset = "utf-8">
+	<style>
+		.code:hover{
+			background-color: #dce8cc;
+		}
+		
+		body{
+			padding: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1> Funciones especiales </h1>
+	<p> Se presentan algunas </p>
+	
+	<br>
+	<h2> 1. map</h2>
+	<p>El método map() crea un nuevo array con los resultados de la llamada a la función indicada aplicados a cada uno de sus elementos.</p>
+	<pre class = "code">
+var numbers = [1, 5, 10, 15];
+var doubles = numbers.map(function (x) {
+  return x * 2;
+});
+// doubles is now [2, 10, 20, 30]
+// numbers is still [1, 5, 10, 15]
+
+var numbers = [1, 4, 9];
+var roots = numbers.map(function (num) {
+  return Math.sqrt(num);
+});
+// roots is now [1, 2, 3]
+// numbers is still [1, 4, 9]
+	</pre>
+	<p> También puede recibir un <b>callback</b> como por ejemplo </p>
+	<pre class = "code">
+const numbers = [1,2,3,4,5];
+const cubes = numbers.map(cube);
+console.log(cubes);
+
+// Función
+function cube(element){
+	return Math.pow(element, 3);
+}
+
+// >>> Salida: [1, 8, 27, 64, 125]
+	</pre>
+	
+	<br>
+	<h2> 2. filter </h2>
+	<p> El método filter() crea un nuevo array con todos los elementos que cumplan la condición implementada por la función dada. </p>
+	<pre class = "code">
+const words = ["spray", "elite", "exuberant", "destruction", "present"];
+
+const result = words.filter((word) => word.length > 6);
+
+console.log(result);
+// Expected output: Array ["exuberant", "destruction", "present"]
+	</pre>
+	
+	<p>También</p>
+	<pre class = "code">
+let numbers = [1,2,3,4,5,6,7];
+let evenNums = numbers.filter(isEven);
+
+console.log(evenNums);
+// >>> Salida: [2, 4, 6]
+
+function isEven(elem){
+	return elem % 2 == 0;
+}
+	</pre>
+	
+	
+	
+	<br>
+	<h2> 3. reduce</h2>
+	<p> El método reduce() ejecuta una función reductora sobre cada elemento de un array, devolviendo como resultado un único valor. </p>
+	<p> La función reductora recibe cuatro argumentos: </p>
+	<ol>
+		<li> Acumulador (acc) </li>
+		<li> Valor Actual (cur) </li>
+		<li> Índice Actual (idx) </li>
+		<li> Array (src) </li>
+	</ol>
+	<b>Sintaxis</b>
+	<pre style = "color: green; font-weight: bold; text-align: center; font-size: 1.1em;">
+arr.reduce(callback(acumulador, valorActual[, índice[, array]])[, valorInicial])
+	</pre>
+	<p>Por ejemplo: </p>
+	
+	<pre class = "code">
+[0, 1, 2, 3, 4].reduce<b style = "color:red">(</b>
+			<b style = "color:orange">function</b> (valorAnterior, valorActual, indice, vector) {
+			  <b style = "color:blue">return</b> valorAnterior + valorActual;
+			}
+	, 10<b style = "color:red">)</b>;
+	
+	<b>// Valor Devuelto: 20</b></pre>
+	<br>
+	
+	<pre class = "code">
+const array1 = [1, 2, 3, 4];
+
+// 0 + 1 + 2 + 3 + 4
+const initialValue = 0;
+const sumWithInitial = array1.reduce(
+  (accumulator, currentValue) => accumulator + currentValue,
+  initialValue,
+);
+
+console.log(sumWithInitial);
+// Expected output: 10
+	</pre>
+	
+	<p>También</p>
+	<pre class = "code">
+const prices = [5, 30, 10, 25, 15, 20];
+// Crear una función para calcular el total
+const total = prices.reduce(suma);
+console.log(total);
+
+function suma(acumulador, elemento){
+	return acumulador + elemento;
+}
+	</pre>
+	
+	
+</body>
+<script>
+
+
+
+
+</script>
+
+</html>
